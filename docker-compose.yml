@@ -1,6 +1,6 @@
 services:
   glpi:
-    image: diouxx/glpi:latest
+    image: ${IMAGE_GLPI}
     container_name: ${GLPI_CONTAINER}
     environment:
       DB_SERVER_HOST: ${DB_SERVER_HOST}
