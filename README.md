@@ -111,14 +111,56 @@ docker logs -f ctr-glpi
 
 Isso iniciará os contêineres em segundo plano.
 
-## Acesso ao GLPI
+## Acessando o glpi WEB [Troca a porta caso tenha alterado no .env]
 
-Após a inicialização, você pode acessar a interface do GLPI em `http://IP_DO_DOCKER:7080`.
+```html
+http://<IP_SERVIDOR>:7080 
+```
 
-## Cron Jobs
+## Voltando Backup
 
-Os jobs do cron estão definidos no arquivo `cron/crontab`. Você pode editá-los conforme necessário.
+- Acesse a pasta do container /bskp/ctr-glpi
 
-## Contribuição
+- Pare o container
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
+```bash
+docker compose stop
+```
+
+- Baixar o seu backup da base de dados para dentro da pasta /bskp/ctr-glpi
+
+- Copie o arquivo **.sql** para a pasta temp dentro do container ctr-mysql
+
+>Exemplo:
+
+```bash
+docker cp /bskp/ctr-glpi/glpi_backup_2025-10-10_22-00-01.sql ctr-mysql:/tmp/
+```
+
+### Restaurando o backup do glpi
+
+Acesse o conteiner ctr-mysql
+
+```bash
+docker exec -it ctr-mysql bash
+```
+
+Restaure a base de dados
+
+```bash
+mysql -u glpi -p glpi < /tmp/glpi_backup_2025-10-06_22-00-01.sql
+```
+
+- Digite a senha do usuario glpi do banco de dados e aguarde o processo terminar
+
+- Após terminar saia do container
+
+```bash
+exit
+```
+
+- Inicie o container novamente
+
+```bash
+docker compose up -d
+```
