@@ -48,7 +48,38 @@ git clone https://github.com/Kriticos/ctr-glpi.git ctr-glpi
 cd ctr-glpi
 ```
 
-### 2. Arquivo **.env**
+## 2. Criando a bBase de dados para o GLPI
+
+Acesse o container do ctr-mysql e crie a base de dados para o glpi:
+
+```bash
+docker exec -it ctr-mysql mysql -u root -p
+```
+
+```sql
+-- 1) Banco com charset/collation modernos
+CREATE DATABASE IF NOT EXISTS glpi
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+-- 2) Usuário (opção A: acessa de qualquer host)
+CREATE USER IF NOT EXISTS 'glpi'@'%' IDENTIFIED BY 'PASSWORD';
+
+--   (opção B: se o GLPI estiver no MESMO host do MySQL)
+-- CREATE USER IF NOT EXISTS 'glpi'@'localhost' IDENTIFIED BY 'PASSWORD';
+
+-- 3) Permissões mínimas necessárias no banco glpi
+GRANT ALL PRIVILEGES ON glpi.* TO 'glpi'@'%';
+-- GRANT ALL PRIVILEGES ON glpi.* TO 'glpi'@'localhost';
+
+-- 4) Em MySQL/MariaDB atuais, FLUSH PRIVILEGES é opcional (o GRANT já recarrega)
+FLUSH PRIVILEGES;
+
+-- 5) (Comando do cliente, não é SQL do servidor)
+-- exit
+```
+
+### 3. Arquivo **.env**
 
 Na pasta /bskp/ctr-glpi, crie uma cópia do arquivo `.env.example` e renomeie-a para `.env`:
 
