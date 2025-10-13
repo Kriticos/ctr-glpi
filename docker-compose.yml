@@ -12,7 +12,7 @@ services:
       - ${PORTS_GLPI}
     volumes:
       - ${VOL_GLPI}
-      - ${VOL_GLPI_CRON}
+      - ${VOL_CRON}
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
