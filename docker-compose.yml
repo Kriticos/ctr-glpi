@@ -12,8 +12,7 @@ services:
       - ${PORTS_GLPI}
     volumes:
       - ${VOL_GLPI}
-      # Se realmente precisar de cron, reative a linha abaixo e garanta permissões corretas.
-      # - ${VOL_GLPI_CRON}
+      - ${VOL_GLPI_CRON}
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
