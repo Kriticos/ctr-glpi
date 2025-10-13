@@ -1,2 +1,6 @@
 # Ignore all .env files in any folder
 **/.env
+
+# Mas mantém a pasta em si (via .gitkeep)
+glpi/**
+!glpi/.gitkeep
