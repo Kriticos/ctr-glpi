@@ -3,16 +3,17 @@ services:
     image: ${IMAGE_GLPI}
     container_name: ${GLPI_CONTAINER}
     environment:
-      DB_SERVER_HOST: ${DB_SERVER_HOST}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      GLPI_DB_HOST: ${GLPI_DB_HOST}
+      GLPI_DB_NAME: ${GLPI_DB_NAME}
+      GLPI_DB_USER: ${GLPI_DB_USER}
+      GLPI_DB_PASSWORD: ${GLPI_DB_PASSWORD}
       PHP_TZ: ${PHP_TZ}
     ports:
       - ${PORTS_GLPI}
     volumes:
       - ${VOL_GLPI}
-      - ${VOL_GLPI_CRON}
+      # Se realmente precisar de cron, reative a linha abaixo e garanta permissões corretas.
+      # - ${VOL_GLPI_CRON}
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
