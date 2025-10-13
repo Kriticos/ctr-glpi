@@ -44,7 +44,6 @@ Crie a pasta **bskp** e acesse-a:
 Depois execute:
 
 ```bash
-```bash
 git clone https://github.com/Kriticos/ctr-glpi.git ctr-glpi
 cd ctr-glpi
 ```
