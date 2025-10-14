@@ -10,7 +10,7 @@ Antes de começar, verifique se você tem os seguintes itens instalados:
 - [Docker Compose](https://docs.docker.com/compose/)
 - [Git](https://git-scm.com/)
 - Rede Docker `network-share` já criada:
-- Container [ctr-mysql]() rodando
+- Container [ctr-mysql](https://github.com/Kriticos/ctr-mysql) rodando
 
 ## Criar a rede externa se ainda não existir
 
@@ -25,12 +25,13 @@ docker network create --driver bridge network-share --subnet=172.18.0.0/16
 A estrutura do projeto é a seguinte:
 
 ```bash
-ctr-glpi/
-├── .env
-├── .env.example
-├── docker-compose.yml
-└── cron/
-    └── crontab
+bskp/
+└── ctr-glpi/
+     ├── .env
+     ├── .env.example
+     ├── docker-compose.yml
+     └── cron/
+          └── crontab
 ```
 
 ## Configuração
@@ -74,7 +75,7 @@ GRANT ALL PRIVILEGES ON glpi.* TO 'glpi'@'%';
 FLUSH PRIVILEGES;
 
 -- 5) (Comando do cliente, não é SQL do servidor)
--- exit
+exit
 ```
 
 ## 3. Arquivo **.env**
@@ -138,6 +139,7 @@ docker compose stop
 ```bash
 docker cp /tmp/NOME_DO_BKP.sql ctr-mysql:/tmp/
 ```
+
 ### 6.3 Restaurando o banco de dados
 
 - Acesse o conteiner ctr-mysql
