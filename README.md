@@ -134,7 +134,7 @@ docker compose stop
 >Exemplo:
 
 ```bash
-docker cp /bskp/ctr-glpi/glpi_backup_2025-10-10_22-00-01.sql ctr-mysql:/tmp/
+docker cp /bskp/ctr-glpi/NOME_DO_BKP.sql ctr-mysql:/tmp/
 ```
 
 ### Restaurando o backup do glpi
@@ -148,7 +148,7 @@ docker exec -it ctr-mysql bash
 Restaure a base de dados
 
 ```bash
-mysql -u glpi -p glpi < /tmp/glpi_backup_2025-10-06_22-00-01.sql
+mysql -u glpi -p glpi < /tmp/NOME_DO_BKP.sql
 ```
 
 - Digite a senha do usuario glpi do banco de dados e aguarde o processo terminar
