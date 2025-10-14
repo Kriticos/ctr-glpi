@@ -26,12 +26,12 @@ A estrutura do projeto é a seguinte:
 
 ```bash
 bskp/
-└── ctr-glpi/
-     ├── .env
-     ├── .env.example
-     ├── docker-compose.yml
-     └── cron/
-          └── crontab
+  └── ctr-glpi/
+      ├── .env
+      ├── .env.example
+      ├── docker-compose.yml
+      └── cron/
+            └── crontab
 ```
 
 ## Configuração
