@@ -18,9 +18,7 @@ Antes de começar, verifique se você tem os seguintes itens instalados:
 docker network create --driver bridge network-share --subnet=172.18.0.0/16
 ```
 
-### OBSERVAÇÃO
-
-> Ajuste a subnet conforme a necessidade do seu cenário.
+> **OBS:**  Ajuste a subnet conforme a necessidade do seu cenário.
 
 ## Estrutura do Projeto
 
@@ -48,7 +46,7 @@ git clone https://github.com/Kriticos/ctr-glpi.git ctr-glpi
 cd ctr-glpi
 ```
 
-## 2. Criando a bBase de dados para o GLPI
+## 2. Criando a base de dados para o GLPI
 
 Acesse o container do ctr-mysql e crie a base de dados para o glpi:
 
@@ -79,7 +77,7 @@ FLUSH PRIVILEGES;
 -- exit
 ```
 
-### 3. Arquivo **.env**
+## 3. Arquivo **.env**
 
 Na pasta /bskp/ctr-glpi, crie uma cópia do arquivo `.env.example` e renomeie-a para `.env`:
 
@@ -89,7 +87,7 @@ cp .env.example .env
 
 >**OBS:** Edite o arquivo `.env` para configurar as variáveis de ambiente conforme necessário.**
 
-## 3. Iniciando o container
+## 4. Iniciando o container
 
 Para iniciar todos os containers em segundo plano:
 
@@ -111,41 +109,44 @@ docker logs -f ctr-glpi
 
 Isso iniciará os contêineres em segundo plano.
 
-## Acessando o glpi WEB [Troca a porta caso tenha alterado no .env]
+## 5. Acessando o glpi WEB
+
+> **OBS:** Substitua `<IP_SERVIDOR>` pelo IP do servidor onde o container está rodando e troque a porta caso tenha alterado no `.env`
 
 ```html
-http://<IP_SERVIDOR>:7080 
+http://IP_SERVIDOR:7080 
 ```
 
-## Voltando Backup
+## 6. Restaurando o backup do glpi
 
-- Acesse a pasta do container /bskp/ctr-glpi
-
-- Pare o container
+### 6.1 Para o container do GLPI
 
 ```bash
+# Acessar pasta do container
+cd /bskp/ctr-glpi
+
+# Parar o container
 docker compose stop
 ```
 
-- Baixar o seu backup da base de dados para dentro da pasta /bskp/ctr-glpi
+### 6.2 Copiando o arquivo para dentro do container
 
-- Copie o arquivo **.sql** para a pasta temp dentro do container ctr-mysql
+- Copie o arquivo **.sql** para a pasta **/tmp** do servidor
 
->Exemplo:
+- Depois de copiar o arquivo **.sql** para a pasta **/tmp** do servidor, copie o arquivo para dentro do container ctr-mysql
 
 ```bash
-docker cp /bskp/ctr-glpi/NOME_DO_BKP.sql ctr-mysql:/tmp/
+docker cp /tmp/NOME_DO_BKP.sql ctr-mysql:/tmp/
 ```
+### 6.3 Restaurando o banco de dados
 
-### Restaurando o backup do glpi
-
-Acesse o conteiner ctr-mysql
+- Acesse o conteiner ctr-mysql
 
 ```bash
 docker exec -it ctr-mysql bash
 ```
 
-Restaure a base de dados
+- Restaure a base de dados
 
 ```bash
 mysql -u glpi -p glpi < /tmp/NOME_DO_BKP.sql
@@ -162,5 +163,9 @@ exit
 - Inicie o container novamente
 
 ```bash
+# Acessar pasta do container
+cd /bskp/ctr-glpi
+
+# Subir o container
 docker compose up -d
 ```
