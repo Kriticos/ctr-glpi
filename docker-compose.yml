@@ -1,18 +1,18 @@
 services:
   glpi:
-    image: ${IMAGE_GLPI}
+    image: diouxx/glpi:latest
     container_name: ${GLPI_CONTAINER}
     environment:
-      GLPI_DB_HOST: ${GLPI_DB_HOST}
-      GLPI_DB_NAME: ${GLPI_DB_NAME}
-      GLPI_DB_USER: ${GLPI_DB_USER}
-      GLPI_DB_PASSWORD: ${GLPI_DB_PASSWORD}
+      DB_SERVER_HOST: ${DB_SERVER_HOST}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       PHP_TZ: ${PHP_TZ}
     ports:
-      - ${PORTS_GLPI}
+      - ${PORTS}
     volumes:
       - ${VOL_GLPI}
-      - ${VOL_CRON}
+      - ${VOL_GLPI_CRON}
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
