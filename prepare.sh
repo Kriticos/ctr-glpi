@@ -7,10 +7,10 @@ echo "📁 Iniciando preparação das pastas do ambiente..."
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 
 # Dois níveis acima do script
-BASE_DIR="$(realpath "$SCRIPT_DIR/../..")"
+BASE_DIR="$(realpath "$SCRIPT_DIR/./.")"
 
 # Diretórios GLPI
-GLPI_BASE_DIR="$BASE_DIR/data/glpi"
+GLPI_BASE_DIR="$BASE_DIR/data"
 GLPI_APP_DIR="$GLPI_BASE_DIR/app"
 GLPI_CRON_DIR="$GLPI_BASE_DIR/cron"
 GLPI_CRON_FILE="$GLPI_CRON_DIR/glpi_cron"
