@@ -3,12 +3,10 @@ services:
     image: ${IMAGE}
     container_name: ${CONTAINER_NAME}
     environment:
-      GLPI_DB_HOST: ${GLPI_DB_HOST}
-      GLPI_DB_PORT: 3306
-      GLPI_DB_NAME: ${GLPI_DB_NAME}
-      GLPI_DB_USER: ${GLPI_DB_USER}
-      GLPI_DB_PASSWORD: ${GLPI_DB_PASSWORD}
-      GLPI_AUTO_INSTALL: "true"
+      DB_SERVER_HOST: ${GLPI_DB_HOST}
+      MYSQL_DATABASE: ${GLPI_DB_NAME}
+      MYSQL_USER: ${GLPI_DB_USER}
+      MYSQL_PASSWORD: ${GLPI_DB_PASSWORD}
       PHP_TZ: ${PHP_TZ}
     ports:
       - ${PORTS}
