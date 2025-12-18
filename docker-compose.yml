@@ -13,7 +13,7 @@ services:
     volumes:
       - ${VOL_GLPI}
       - ${VOL_CRON}
-      - ${VOL_TIMEZONE}
+      #- ${VOL_TIMEZONE}
       - ${VOL_LOCALTIME}
     networks:
       network-share:
